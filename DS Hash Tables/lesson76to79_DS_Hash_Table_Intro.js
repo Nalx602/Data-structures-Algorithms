@@ -78,6 +78,18 @@ const b = new Set();
 
 
 
+//          Conclusion:
+//It is very common to use hash tables in interviews; It solves the problem
+//of nested 'for' loops which gives you the O(n^2) time complexity; but there is a trade-off for memory
+//as you copy data in a new space in RAM;
+//  PROs:
+//They have really fast lookups( as long as the prog language has a good collision resolution);
+//They have fast insertion & deletion; Also it has flexible keys ( using customazible keys instead of 
+//numbers like Arrays have);
+//  CONs:
+//they are unordered; and also has slow key iteration ( if you want to get all the keys from a hashTablee);
+//due to collisions, worst case scenarios might get you a O(n) time complexity;
+
 
 
 
