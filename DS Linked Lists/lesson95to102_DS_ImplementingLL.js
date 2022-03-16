@@ -156,11 +156,44 @@ class LinkedList {
     previousNode.next = currentNode.next;
     delete currentNode.next;
     delete currentNode.value;
-    console.log(currentNode);
 
     //2. Decrease the length with 1
     this.length--;
 
+    return this.printList();
+  }
+
+  reverse(){
+    if(!this.head.next) {
+      //in case the LL is only made of a single item, just return it back
+      return this.head;
+    }
+    
+    // check this visualisation "https://media.geeksforgeeks.org/wp-content/cdn-uploads/RGIF2.gif"
+    this.tail = this.head; //as the LL will be reversed;
+    let currNode = this.head;
+    let nextNode = null;
+    let prevNode = null;
+
+    //This is the iterative way:
+    //You will use 3 nodes, a previousNode, a currentNode and a nextNode;
+    //You will traverse the LL and make sure you don't lose the relation between a node with its predecesor 
+    //or his successor; initially you will set the currNode = our head & the nextNode and prevNode = null;
+
+    //nextNode will be currNode.next; as you do that, you can unlink the current node from his successor and revert
+    //his direction (now...for the first elem of the LL, you will need to point towards NULL, that is why we 
+    //initially set the prevNode=null);
+    //then you move forward prevNode & currNode;
+    //We chose to take as a sign that the LL has finished once the currNode = null;
+    //Once that has happened, then prevNode will be the head, so we have to set it up as such;
+    
+    while(currNode!== null){
+      nextNode=currNode.next;
+      currNode.next = prevNode;//in first iteration, in fact poining the first elem to null
+      prevNode=currNode;//bringing it forward one step
+      currNode=nextNode;//bringing it forward one step
+    }
+    this.head = prevNode;
     return this.printList();
   }
 }
@@ -171,5 +204,6 @@ myLinkedList.append(16);
 myLinkedList.prepend(1);
 myLinkedList.insert(3, 99);
 myLinkedList.insert(8, 11);
-myLinkedList.remove(12);
+myLinkedList.remove(3);
+myLinkedList.reverse();
 console.log(myLinkedList.length);

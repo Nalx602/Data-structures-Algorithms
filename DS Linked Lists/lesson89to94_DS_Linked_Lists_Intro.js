@@ -37,7 +37,7 @@
 // POINTER
 // It's simply a reference to a place in memory, or another object or another node etc...
 // const obj1 = {a:true};
-// const obj2= obj1 ;// this is an example of a pointer in JS; in here obj2 is not alike for like of
+// const obj2= obj1 ;// this is an example of a pointer in JS; in here obj2 is not a like for like of
 //obj1 but a shallow copy of it; obj1 will have a place in memory where its value is saved;
 //obj2 will reference (have a pointer) to the same memory location;
 //In case you delete obj1, you still gonna have the memory location unchanged as there is
