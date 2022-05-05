@@ -121,7 +121,58 @@ class BinarySearchTree {
     //ended because currentNode ended on null, then you can return false( meanining no node was found);
   }
 
-  //remove(value){  }
+  remove(value){
+    //In order to remove a node, you must realize that the BST will still need to maintain its properties;
+    //We have 3 scenarios, based on the # of children the being removed node has:
+
+    //1. The node is a leaf ( 0 children)
+    //In this case you can just remove it straight away, as there are no other nodes after it
+
+    //2. The node has 1 child
+    //When referring to "1 child", that child can have other nodes under it ( like an entire subtree), it doesn't
+    //necessarily mean that there is only one node under the node we want to remove;
+    //As a note, all the nodes under the child will have to follow the BST rules, so:
+    //-if the child is on the left, all its subnodes will be lower that our node;
+    //-if the child is on the right, all its subnodes will be higher that our node;
+    //So basically, if you remove the node and link its parent with its child, the BST rules will be preserved
+
+    //3. The node has 2 children
+    //Again, each child of the 2 can be the start of an entire subtree, subtree which will have to follow the BST rules;
+    //            12
+    //          /    \
+    //        /        \
+    //      5             15
+    //     / \          /    \
+    //    3   7      13        17
+    //                 \      /  \      
+    //                 14   16    20   
+    //                            /
+    //                          18
+    //Let's assume we would like to remove node 15. You cannot link the parent with only one of the children, as you
+    //will lose the other child and its branch (like connecting 12 <->17, you will lose the link to 13); So what you have to do
+    //is to select one of the 2 branches, select a specific node from it and copy/paste it in the place of node 15; now, which one
+    //will you choose? Well, you still have to preserve the BST rules for both branches at the same time. 
+    //The solution is to select the smallest node from the right branch or the highest node from the left branch;
+    //Let's test the smallest node from right branch (node 16), if put in place of node 15:
+    //- it will still be higher than any node from left branch ( cause it's from the right branch)
+    //- being instead of node 15, all nodes at its right will need to be higher( which they are, as we 
+    //chose the smallest from right branch);
+    //            12
+    //          /    \
+    //        /        \
+    //      5             16
+    //     / \          /    \
+    //    3   7      13        17
+    //                 \      /  \      
+    //                 14   16    20   
+    //                            /
+    //                          18
+    //So now we've put 16 in the place of 15, but what will happen to the initial place of 16? Well, being the smallest
+    //number from the right branch, that means for sure there will be no child on it's left side ( like a an even smaller
+    //node under it). So the minimum node from the right side will definitely have 0 or 1 children (for which you alread
+    //have methods to remove it and use them to delete it);
+    
+  }
 }
 
 
