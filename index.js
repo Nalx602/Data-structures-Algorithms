@@ -38,7 +38,6 @@ class BinarySearchTree {
     //Setting the currentNode as the root node
     let currentNode = this.root;
 
-    console.log('-------------------------');
     while (searchingLocation) {
       //If newNode has to go to right
       if (newNode.value > currentNode.value) {
@@ -71,8 +70,6 @@ class BinarySearchTree {
         return console.log('Following node exists & will be skipped :', newNode.value);
       }
     }
-    console.log(this.root);
-    console.log('-------------------------');
   }
 
   lookup(value) {
@@ -87,7 +84,8 @@ class BinarySearchTree {
     // //1  6  15  
 
     if(!this.root) return false; //checking if there is no BST first;
-    
+
+    let parentNode = null;
     let currentNode = this.root;
 
     // while (true) {//Breaking out of the loop with "return";
@@ -109,21 +107,23 @@ class BinarySearchTree {
 
     while(currentNode){
       if(value === currentNode.value){
-        return currentNode;//we exit the function here;
+        return [currentNode,parentNode];//we exit the function here;
       } else if (value < currentNode.value){//move left
+        parentNode = currentNode;
         currentNode = currentNode.left;
       } else if (value > currentNode.value){//move right
+        parentNode = currentNode;
         currentNode = currentNode.right;
       } 
     }
     
     return false;//if the currentNode was not returned in the while loop and the loop 
-    //ended because currentNode ended on null, then you can return false( meanining no node was found);
+    //ended because currentNode ended on null, then you can return false (meanining no node was found);
   }
 
   remove(value){
     //In order to remove a node, you must realize that the BST will still need to maintain its properties;
-    //We have 3 scenarios, based on the # of children the being removed node has:
+    //We have 3 scenarios, based on the # of children the node being removed has:
 
     //1. The node is a leaf ( 0 children)
     //In this case you can just remove it straight away, as there are no other nodes after it
@@ -171,38 +171,60 @@ class BinarySearchTree {
     //number from the right branch, that means for sure there will be no child on it's left side ( like a an even smaller
     //node under it). So the minimum node from the right side will definitely have 0 or 1 children (for which you alread
     //have methods to remove it and use them to delete it);
+
+    //We will need to look for the removingNode & also store  his parent( to chain his left/right to a child/null);
+    //need to handle exception when the removing node = root node ( no parent, how do you link it?)
     
+    let parentNode = null;
+    let currentNode = this.root;
+    while(currentNode){
+      if(currentNode.value === value){
+        return ('Removing node is :', currentNode, '\nParent node is :', parentNode);
+      } else if(value < currentNode.value){//going to the left
+        parentNode = currentNode;
+        currentNode = currentNode.left;
+      } else if(value > currentNode.value){//going to the right
+        parentNode = currentNode;
+        currentNode = currentNode.right;
+      }     
+    }
+    return false;    
   }
 }
 
 
-
 const tree = new BinarySearchTree();
+
 // tree.insert(9);
-// tree.insert(10);
-// tree.insert(12);
-// tree.insert(8);
-// tree.insert(7);
+// tree.insert(4)
+// tree.insert(6)
+// tree.insert(20)
+// tree.insert(170)
+// tree.insert(15)
+// tree.insert(1)
+//console.log('\n\nPlease see your lookup result : \n\n',tree.lookup(89));
 
-
-tree.insert(9);
-tree.insert(4)
-tree.insert(6)
-tree.insert(20)
-tree.insert(170)
+tree.insert(12);
+tree.insert(5)
+tree.insert(3)
+tree.insert(7)
 tree.insert(15)
-tree.insert(1)
-console.log('\n\nPlease see your lookup result : \n\n',tree.lookup(89));
+tree.insert(13)
+tree.insert(14)
+tree.insert(17)
+tree.insert(16)
+tree.insert(20)
+tree.insert(18)
+//console.log(JSON.stringify(tree));
+tree.remove(18);
 
-//console.log(JSON.stringify(traverse(tree.root)));
 
-//     9
-//  4     20
-//1  6  15  170
-
+// In case you need to create an object of the whole tree, to see it in Google Crome developer:
+// console.log(JSON.stringify(traverse(tree.root)));
 // function traverse(node) {
 //   const tree = { value: node.value };
 //   tree.left = node.left === null ? null : traverse(node.left);
 //   tree.right = node.right === null ? null : traverse(node.right);
 //   return tree;
 // }
+
