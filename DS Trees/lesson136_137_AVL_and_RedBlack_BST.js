@@ -100,8 +100,8 @@
 //search for a node that didn’t exist within the tree. 
 
 // Notes(!):
-// - you will find out that a chain of 3 nodes cannot possibly every a valid red-black tree, however
-//you would color them, as they either violate rule#3 or rule#4
+// - you will find out that a chain of 3 nodes cannot possibly ever be a valid red-black tree, however
+//you would color them( as they either violate rule#3 or rule#4 );
 // - when inserting a node, before assesing the 4 rules, it is a good advice to make it as standard
 //with the colour red and after that, try & subsequently fix the violations that appear;
 // - to combat violations, you will need to recolour and/or rotate the nodes;

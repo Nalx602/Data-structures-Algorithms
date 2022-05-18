@@ -7,7 +7,7 @@
 //A child node only descends from one parent;
 //A node can only point downwords towards a child, does not have to point towards its parent;
 //Leaf nodes (2,4,6,7) are the at very end of the tree datastructure;
-//Siblings (2,3,4 or 6,7) are the nodes on the same level ( hierarchy);
+//Siblings (2,3,4 or 6,7) are the nodes on the same level ( hierarchy) coming from same parent;
 //A subtree is a group of a tree that follows the same rules ( 3,6,7);
 //    1
 //  / | \
