@@ -82,3 +82,55 @@
 //We can also determine the index of a node’s parent by subtracting 1 from the current node’s index, n, dividing
 //it by 2, and finding the floor of that number
 //index of parent =⌊(n-1)/2⌋
+
+//Implementation of a maxHeap
+
+class maxHeap {
+  constructor() {
+    this.heap = []
+  }
+
+  swap(arr, indexParent, indexChild) {
+    //method to swap 2 positions in an array
+    let temp = arr[indexParent];
+    arr[indexParent] = arr[indexChild];
+    arr[indexChild] = temp;
+  }
+
+  parentIndex(indexChild) {
+    return Math.floor((indexChild - 1) / 2);
+  }
+
+  leftChildIndex(indexParent) {
+    return 2 * indexParent + 1;
+  }
+
+  rightChildIndex(indexParent) {
+    return 2 * indexParent + 2;
+  }
+
+  insert(value) {
+    //when the heap is empty
+    if (this.heap.length === 0) {
+      return this.heap[0] = value;
+    }
+
+    //if the heap is not empty, you have to add values at the very end
+    this.heap.push(value);
+    if (this.heap[this.heap.length - 1] > this.heap[this.parentIndex(this.heap.length - 1)]){
+      this.swap(this.heap,this.parentIndex(this.heap[this.heap.length - 1]),this.heap.length - 1)
+    }
+  }
+
+
+}
+
+const myHeap = new maxHeap;
+myHeap.insert(101);
+myHeap.insert(180);
+//myHeap.insert(180);
+// myHeap.insert(34);
+// myHeap.insert(67);
+// myHeap.insert(12);
+
+console.log(myHeap);
