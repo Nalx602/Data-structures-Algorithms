@@ -69,3 +69,11 @@ const graph5 = [
   [0,14,56,0]
 ]
 //Or you can make it with a hash table
+
+//Pro 
+//it's good to represent relationships
+
+//Cons
+//scaling is hard
+
+//There is a library called neo4j which will allow you expand your implementation with graphs

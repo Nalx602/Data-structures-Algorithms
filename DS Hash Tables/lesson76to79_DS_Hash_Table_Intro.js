@@ -14,9 +14,9 @@
 //index it is stored. But you cannot use the number indexes from array. To be useful, you
 //replace the number indexes with something familiar, like a key;
 
-//To make the correlation, the key will be run through a has function which will
+//To make the correlation, the key will be run through a hash function which will
 //give a random number as output (a hash) which will be fairly unique to that value ( not always);
-//This output is called the hash and with it you can manipulate it in order indicate a 
+//This output is called the hash and with it, you can manipulate it in order indicate a 
 //memory address in the RAM;
 
 // What hash table do, they go a bit furhter & store a collection of (key, value) pairs & use 
@@ -32,7 +32,7 @@
 //the hash with it and straight away go to the memory on RAM where key:value is saved (grapes:10).
 //You can see the advantage of using hashing is that the table address of a record can be //directly computed from the key;
 
-//The hash function will be the one that will take some computational cost. But to retrieve, //insert, search or delete will be in general O(1);
+//The hash function will be the one that will take some computational cost. But to retrieve, insert, search or delete will be in general O(1);
 
 //Some example
 
@@ -52,7 +52,8 @@ console.log( user.hasOwnProperty('age') );//also O(1)
 // COLISIONS
 
 //One of the main problem, 2 keys might give the same output (hash), so the key/value pair
-//might be represented by the same memory address. This is called a collision. The two common //methods for collision resolution are separate chaining and open addressing.
+//might be represented by the same memory address. This is called a collision. The two common 
+//methods for collision resolution are separate chaining and open addressing.
 
 //In the case of chaining, the collided items are chained together through a single linked list,
 //which can be traversed to access the item with a unique search key. Of course, when you will
