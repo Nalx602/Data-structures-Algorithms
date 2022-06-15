@@ -28,7 +28,7 @@
 //So for each elem to put it in the right position, you traverse the entire array once;
 //So time complexity is O(n^2) and space complexity is O(1);
 
-
+// BUBBLE SORT -> DON'T USE IT!
 const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
 function swap(arr, i) {
