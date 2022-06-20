@@ -47,4 +47,4 @@
 
 //Compared to an array, the lookup will be faster; insert/delete will be also faster ( except adding to the end);
 //Compared to a hash table, we have advantage to have the data sorted;
-//The BSTs aren't the fastest but they do a lot of this pretty good;
+//The BSTs aren't the fastest but they do a lot of things pretty good;

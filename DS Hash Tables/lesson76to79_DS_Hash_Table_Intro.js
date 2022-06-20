@@ -21,7 +21,7 @@
 
 // What hash table do, they go a bit furhter & store a collection of (key, value) pairs & use 
 //the key as an index; when the key is mentioned -> the value will be easily retrieved.
-//To make the correlation, hash tables use the hash functions wit the output as random
+//To make the correlation, hash tables use the hash functions with the output as random
 //number based on the input (which will be the key).
 
 //Let's say you need to store the info that you have 10 grapes. In a hash table, you declare
@@ -30,7 +30,8 @@
 //At this memory address it will be decided to have the key:value pair stored.
 //So next time when I want to know about grapes, the PC will take the key, calculate
 //the hash with it and straight away go to the memory on RAM where key:value is saved (grapes:10).
-//You can see the advantage of using hashing is that the table address of a record can be //directly computed from the key;
+//You can see the advantage of using hashing is that the table address of a record can be 
+//directly computed from the key;
 
 //The hash function will be the one that will take some computational cost. But to retrieve, insert, search or delete will be in general O(1);
 

@@ -1,113 +1,168 @@
-// Merge Sort and O(n log n)
+// Quick Sort
 
-//It uses Divide & Conquer  ( Quick sort uses it also);
-//It uses recursion;
-//We will get O(n logn) time complexity but O(n) space complexity
+//It is one of the most used sorting algorithims;
+//It is a divide-&-conquer strategy, divind the problem in a set of smaller, 
+//simillar problems and solve those problems; It uses a pivoting tehnique by 
+//gettting elements in a "sorted postion";
 
-//How it works
+//An element is in a "sorted position" if all the elements on its left-hand side
+//are smaller then him & all the elements on its right-hand side are higher
+//then him;
 
-// Lets say we have array [6,5,3,1,8,7,2,4];
-//You take the array and split it in 2 halves : [6,5,3,1] & [8,7,2,4]
-//Again, the result 2 arrays, you split each in half:
-//[6,5] [3,1] [8,7] [2,4] ...and you keep on doing that until you
-//have unitary arrays: [6] [5] [3] [1] [8] [7] [2] [4]
+//Example of array A = [10, 16, 8, 12, 15, 6, 3, 9, 5];
 
-//NOTE:for odd arrays like [1,2,3] -> [1,2] & [3] 
-//then next step -> [1] & [2] & [3]
+//We note 2 indexes on it, to store the ends of the array we working on;
+// a low ( l = A[0] ) 
+// a high ( h = A[length-1] ) 
+//We choose the first element ( A[0] = 10) as being the pivot & we want to 
+//find the "sorted position" of A[0] = 10; So:
+//- any el from left-hand side and greater then 10 -> move to the right of 10
+//- any el from right-hand side and lower then 10 -> move to the left of 10
+//Note: it does not matter the index where the elems will end on the
+// right/left sides, they just need to be on the correct side;
 
-//Once you have split everything into singleton arrays, you start 
-//merging them toghether but in a sorted way; you combine 1st singleton 
-//with 2nd, 3rd with 4th etc., until you reach a list of subarrays
-//each of length=2; then you merge again one with another, until you
-//will reach subarrays each of length=4 ...and so on until you reach
-//the initial array;
+//Now, to do that, we will use 2 indexes which will traverse the array
+//left-> right ( i ) and right->left ( j );
+// i will start from l, j will start from h;
+//          l                           h
+//     A = [10, 16, 8, 12, 15, 6, 3, 9, 5];
+//pivot=10  i->                       <-j
 
-//NOTE: the 2 subarrays that you merge are already sorted, by merging
-//them you must make sure the bigger resulting array is sorted again
-//for the next merge;
+// i will search for elems > then pivot ( i can go till end of array)
+// j will search for elems < pivot ( j can go till pivot );
+//but if j gets lower than i, you stop;
 
-//But, when merging them, how will they be merged in sorted way? 
-//So you have 2 subarrays and you want to create a sorted array from them;
-//The rule is, take each of 1st elem of the 2 subarrays that you want to merge,
-//compare them and which one is smaller will be the 1st elem in the bigger,
-//sorted array; now, because the 2 subarrays are already sorted, 
-//taking their 1st elem assures us that they are the smallest value of the
-//2 respective subarrays -> which one is smallest from these 2 1st 
-//elements, for sure will be the smallest from the entire group; so it is 
-//ok to put it at the beginning of the sorted array; 
-//once an elem has been added to the sorted array, it must be popped out from
-//the originating subarray, exposing the next elem from that subarray for
-//comparison next time;
-//So, in conclusion, you take the 1st elements of each subarray, compare
-//them, which one is smallest is popped out of his subarray and goes to 
-//the sorted array; then you compare again the 1st elements of the subarrays,
-//which one is smallest is popped again and added to next position of
-//the sorted array until one of the subarrays remains without elements;
-//Once that happens, the other subarray can be merged to the end
-//of the sorted array, as you are sure they are bigger then the other
-//elements & also are sorted;
 
-//Eg:[6] [5] [3] [1] [8] [7] [2] [4]
-//    [5,6]   [1,3]   [7,8]   [2,4]
-//You want to combine [5,6] with [1,3] -> 5?1 ->1 (pop it and add it to the array)
-//                    [5,6] with [3] ->  5?3 ->3 (pop it and add it to the array)
-//                    [5,6] with [] -> other subarray is empty, so add it at the end
-//[1,3,5,6]
+//            Partitioning procedure
+//this is the procedure to find the "sorted position";
 
-const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0, -100];
+//---------------------------------------------------------------------------
+//Increment i until you find an el > 10 & Decrement j until you find en el < 10 :
+//     A = [10, 16, 8, 12, 15, 6, 3, 9, 5];
+//pivot=10      i                       j
+// i found el 16, j found el 5 -> 
+//Now exchange them
+//     A = [10, 5, 8, 12, 15, 6, 3, 9, 16];
+//pivot=10      i                       j
+//-----------------------------------------------------------------------------
+//Again, move i until you find an el > 10 & move j until you find en el < 10:
+//     A = [10, 5, 8, 12, 15, 6, 3, 9, 16];
+//pivot=10            i             j
+//Now exchange them
+//     A = [10, 5, 8, 9, 15, 6, 3, 12, 16];
+//pivot=10            i             j
+//-----------------------------------------------------------------------------
+//Move i and j
+//     A = [10, 5, 8, 9, 15, 6, 3, 12, 16];
+//pivot=10               i      j
+//Now exchange them
+//     A = [10, 5, 8, 9, 3, 6, 15, 12, 16];
+//pivot=10               i      j
+//-----------------------------------------------------------------------------
+//Move i and j:
+//     A = [10, 5, 8, 9, 3, 6, 15, 12, 16];
+//pivot=10                  j  i
+//Once j becomes less than i, the index where j is, will be the position
+//of the pivot -> swap the pivot with the elem from index j (swap 6 with 10) =>
+//     A = [6, 5, 8, 9, 3, 10, 15, 12, 16];
+//          \.........../  ^   \......../
+//            unsorted     |    unsorted
+//                         |
+//you can see "10" is now in the "sorted position", also called the "partitioning
+//position" (left side has smaller elem and right side has larger elems); 
+//-----------------------------------------------------------------------------
 
-function merge(arr1, arr2){
-  //Given 2 arrays which are sorted, this fct will return the merged sorted array;
-  const mergSortArr = [];
+//Now there are 2 subarrays which are not sorted, onto which we can do quicksort
+//recursively on either side, with their respective ends l & h and choosing
+//their 1st element as the pivot:
+//    [6, 5, 8, 9, 3]    &    [15, 12, 16]
+//    l            h          l        h
+//    i->        <-j          i->    <-j
+//   pivot=6               pivot=15
+//We keep on doing this until we have singleton arrays ( Base scenario);
+//Notes:
+// - if the array we are working on has a single elem, then that array is sorted;
+// - if j reaches the pivot, that means the pivot is already in "sorted position";
 
-  //.shift() pops the 1st el of an array, shortening the array
-  while( arr1.length > 0 && arr2.length > 0 ){
-    arr1[0] < arr2[0] ? mergSortArr.push(arr1.shift()) : mergSortArr.push(arr2.shift());
-    //at the end of this loop, one of the arrays will be empty;
-  }
-
-  //adding the rest of the remaining subarray
-  arr1.length === 0 ? mergSortArr.push(...arr2) : mergSortArr.push(...arr1);
-  return mergSortArr;  
+function swap(arr, i, j){
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
 }
 
-//We will have to split the arr in singletons in a recursive way;
+function partition(arr, l, r){
+  //Finding the sorted position of the pivot elem ( pivot elem = arr[0]);
 
-//function mergeSort(arr) steps:
-//1. the base scenario - when left & right are length = 1;
-//2. some code which will split the array in 2 sub arrays> left & right
-//3. call itself twice in a loop : mergeSort(left), mergeSort(right);
-//and these results to be used in fct merge, which we will return;
+  let pivot =  arr[l];
+  let i = l+1;
+  let j = r;
 
+  while(true) {//keep in the loop until  j< i,
+    //then we know we found the j sorted position
+    
+    //scanning with i and j
+    while( arr[i] <= pivot && i <= r) i++;
+    while( arr[j] >= pivot && j > l) j--;//in case j reaches the position in front of pivot
+    //and needs to decrement still, then you need to stop, as it will enter the loop anyway;
+    //you know in the next loop the while condition will fail;
 
-//Now, somewhere in between we will have to do the merging:
-//You do "merge(mergeSort(left),mergeSort(right))";
-//You can see that each merge invokes the split of left & right
-//again, as they have to go through mergeSort;
-//Once it gets to singletons, arr.length === 1 -> the singleton
-//is returned ...you will have merge(singleton, singleton) ->
-//the merged array will be returned and serve as an input for 
-//the next merge(mergeSort(left), mergeSort(right));
+    
+    //So now i and j have been moved 
+    
+    if (j < i) break;// checking if i and j crossed each other and break
+    //from the loop if so; otherwise keep on swapping & moving i/j
+    
+    swap(arr,i, j);//this swap will not happen when crossing happens;
+    //you don't want t
+  }
 
-
-function mergeSort(arr){
-
-  //Below is the base scenario
-  if(arr.length === 1) return arr;
-
-  //Below is the recursive scenario
-  let left, right = [];
-  let indexMiddle = Math.floor( arr.length/2 );//arr.length =7
-  // 7/2 =3.5 -> indexMiddle=3, so left arr 0->3 , right 4->6;
-  //It doesn't really matter which one will be longer
-
-  //slice(start,end)-> copy of the arr including start index excluding end
-  //slice(start) - > copy of the arr including start up to the end of arr
-  left = arr.slice(0, indexMiddle);//will not include indexMiddle
-  right = arr.slice(indexMiddle);//will include indexMiddle up to finish;
-
-  return merge (mergeSort(left), mergeSort(right) );  
+  //swap default pivot el with the calculated "sorted position" j
+  swap(arr, l, j);
+  return j;
   
 }
 
-console.log( mergeSort( numbers ) );
+function quickSort(arr, l=0, h=arr.length-1){
+  //we've set the default left and right values;
+  //if they are not specified, they will be index 0 and last index of the arr;
+  //when doing recursion, we will overwrite them;
+  
+  //You will need to do this recursively
+
+  let sortedPos = null;
+
+  //Base scenario is when the unsorted subarrays are singletons, so i on top of j
+  if ( l===h ) return j;
+
+  sortedPos = partition(arr, l, h)
+
+  //Recursion
+
+  quickSort(arr, l , sortedPos);
+  quickSort(arr, sortPos+1, h);
+  
+}
+
+const testArr = [100, 16, 8, 12, 15, 6, 3, 9, 5];
+
+quickSort(testArr);
+console.log(testArr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Time complexity is O(n * log n) and space complexity is O(logn);
+//Quick sort has a O(n^2) time complexity when it comes to worst case;
+//If you cannot guarantee the pivot was chosen efficiently, the 
+//time complexity might be worse than Merge Sort ( for which the worst
+//time complexity scenario will reach O(n logn) )
+
