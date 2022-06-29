@@ -23,7 +23,6 @@
 //Remember how you returned a list at BFS? Well, for DFS there are 3 ways
 //to return that list based on the DFS traversal. 
 
-//        101 
 
 class Node {
   constructor(value) {
@@ -142,7 +141,7 @@ class BinarySearchTree {
     let currentNode = this.root;//currentNode will be like the position where
     //you are checking at the moment; you start from root;
     
-    let queue = [];//keeps track of the children of the nodes of the level we are at;
+    let queue = [];//keeps track of thex children of the nodes of the level we are at;
 
     queue.push(currentNode);//so we put the root node in the queue
 
@@ -200,5 +199,6 @@ tree.insert(1)
 
 
 console.log( tree.breadthFirstSearch() );
-
 console.log( tree.bfsRec([tree.root] , []) );
+
+//test
