@@ -201,4 +201,4 @@ tree.insert(1)
 console.log( tree.breadthFirstSearch() );
 console.log( tree.bfsRec([tree.root] , []) );
 
-//test
+//test2
