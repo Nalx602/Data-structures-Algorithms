@@ -85,4 +85,9 @@ console.log(memoized(5));
 console.log(memoized(5));
 console.log(memoized(5));
 
-//
+// Questions to ask in order to see if a problem can be solved with Dynamic Programming
+
+//1. Can be divided into subproblems?
+//2. Does it have a recursive solution?
+//3. Are there repetitive subproblems?
+//4. Can you make use of memoization of the subproblems?
