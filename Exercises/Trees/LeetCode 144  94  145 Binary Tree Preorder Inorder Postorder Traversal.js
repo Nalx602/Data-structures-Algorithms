@@ -54,3 +54,32 @@ const preorderRec = function (node, list) {
   //statements have bubbled out and no longer are met and the list is finished
   return list;
 };
+
+//-------------------------------------------------------
+const inorderTraversal = function (root) {
+  let number = [];
+  if (root) inorderRec(root, number);
+  return number;
+};
+
+const inorderRec = function (node, list) {
+  if (node.left) inorderRec(node.left, list);
+  list.push(node.val);
+  if (node.right) inorderRec(node.right, list);
+  return list;
+};
+
+//-----------------------------------------------------------
+
+const postorderTraversal = function (root) {
+  let number = [];
+  if (root) postorderRec(root, number);
+  return number;
+};
+
+const postorderRec = function (node, list) {
+  if (node.left) postorderRec(node.left, list);
+  if (node.right) postorderRec(node.right, list);
+  list.push(node.val);
+  return list;
+};
