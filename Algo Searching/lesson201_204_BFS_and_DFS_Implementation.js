@@ -288,3 +288,25 @@ console.log("BFS recursively :\n", tree.bfsRec([tree.root], []));
 console.log("DFS InOrder :\n", tree.dfsInOrder());
 console.log("DFS PreOrder :\n", tree.dfsPreOrder());
 console.log("DFS PostOrder :\n", tree.dfsPostOrder());
+
+// From geeksforgeeks
+
+//    Inorder
+// 1. Traverse the left subtree, i.e., call Inorder(left->subtree)
+// 2. Visit the root.
+// 3. Traverse the right subtree, i.e., call Inorder(right->subtree)
+//Note: this traversal gives nodes in non-decreasing order.
+
+//    Preorder
+// 1. Visit the root.
+// 2. Traverse the left subtree, i.e., call Preorder(left->subtree)
+// 3. Traverse the right subtree, i.e., call Preorder(right->subtree)
+//Note: this traversal is used to create a copy of the tree.
+//Preorder traversal is also used to get prefix expressions of an expression tree.
+
+//    Postorder
+// 1. Traverse the left subtree, i.e., call Postorder(left->subtree)
+// 2. Traverse the right subtree, i.e., call Postorder(right->subtree)
+// 3. Visit the root
+//Note: this traversal is used to delete the tree.
+//Postorder traversal is also useful to get the postfix expression of an expression tree.
