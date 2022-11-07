@@ -12,14 +12,13 @@ class BinarySearchTree {
   }
 
   insert(value) {
-    const newNode = new Node(value);//creating a new node
+    const newNode = new Node(value); //creating a new node
 
     // 1. in case the tree has no elements & this would be the first node added,
     //then the added node becomes the root
     if (this.root === null) {
       this.root = newNode;
-      return console.log('Root node added as :', newNode);
-
+      return console.log("Root node added as :", newNode);
     }
 
     // 2. Adding a new node:
@@ -41,10 +40,10 @@ class BinarySearchTree {
     while (searchingLocation) {
       //If newNode has to go to right
       if (newNode.value > currentNode.value) {
-        //If currentNode.right is empty, then you found the place to put the newNode        
+        //If currentNode.right is empty, then you found the place to put the newNode
         if (!currentNode.right /*or equal to null*/) {
           currentNode.right = newNode;
-          searchingLocation = false;//you break the loop
+          searchingLocation = false; //you break the loop
         } else {
           //if currentNode.right has also a node, you have to move currentNode to it, so
           //that the newNode will be compared with it in the next loop;
@@ -54,10 +53,10 @@ class BinarySearchTree {
 
       //If newNode has to go to left
       if (newNode.value < currentNode.value) {
-        //If currentNode.left is empty, then you found the place to put the newNode        
+        //If currentNode.left is empty, then you found the place to put the newNode
         if (!currentNode.left) {
           currentNode.left = newNode;
-          searchingLocation = false;//you break the loop
+          searchingLocation = false; //you break the loop
         } else {
           //if currentNode.left has also a node, you have to move currentNode to it, so
           //that the newNode will be compared with it in the next loop;
@@ -67,7 +66,10 @@ class BinarySearchTree {
 
       //If newNode == with current node;
       if (newNode.value === currentNode.value) {
-        return console.log('Following node exists & will be skipped :', newNode.value);
+        return console.log(
+          "Following node exists & will be skipped :",
+          newNode.value
+        );
       }
     }
   }
@@ -77,13 +79,13 @@ class BinarySearchTree {
     //if not, you check if the current node has any children; if none, the value is not in BST (you reached end of a branch);
     //if yes (1 or 2 children), you decide to go left/right but first checking if there is a left/right;
     //Why do this check again? Cause you might have tree like below and look for node 170;
-    //When you reach node 20, you must compare 20 with 170 -> you must go right (20 has 1 child to the left), but 
+    //When you reach node 20, you must compare 20 with 170 -> you must go right (20 has 1 child to the left), but
     //there is no right, so you come to conclusion you reached end of a branch & did not find your node;
     // //     9
     // //  4     20
-    // //1  6  15  
+    // //1  6  15
 
-    if(!this.root) return false; //checking if there is no BST first;
+    if (!this.root) return false; //checking if there is no BST first;
 
     let parentNode = null;
     let currentNode = this.root;
@@ -97,31 +99,33 @@ class BinarySearchTree {
     //     //if searched value is higher and there is a branch to the right, then go right
     //     currentNode = currentNode.right;
     //   } else if (currentNode.value !== null && currentNode.left !== null && value < currentNode.value) {
-    //     //if searched value is lower and there is a branch to the left, then go left 
+    //     //if searched value is lower and there is a branch to the left, then go left
     //     currentNode = currentNode.left;
     //   } else return false;
     // }
 
-    // A  nicer way to do this is to do "while(currentNode)"; this way, at the begining of each loop, you  
-    //check if the currentNode ended on a "null" spot while in previous loop, meaning end of the branch; 
+    // A  nicer way to do this is to do "while(currentNode)"; this way, at the begining of each loop, you
+    //check if the currentNode ended on a "null" spot while in previous loop, meaning end of the branch;
 
-    while(currentNode){
-      if(value === currentNode.value){
-        return [currentNode,parentNode];//we exit the function here;
-      } else if (value < currentNode.value){//move left
+    while (currentNode) {
+      if (value === currentNode.value) {
+        return [currentNode, parentNode]; //we exit the function here;
+      } else if (value < currentNode.value) {
+        //move left
         parentNode = currentNode;
         currentNode = currentNode.left;
-      } else if (value > currentNode.value){//move right
+      } else if (value > currentNode.value) {
+        //move right
         parentNode = currentNode;
         currentNode = currentNode.right;
-      } 
+      }
     }
-    
-    return false;//if the currentNode was not returned in the while loop and the loop 
+
+    return false; //if the currentNode was not returned in the while loop and the loop
     //ended because currentNode ended on null, then you can return false (meanining no node was found);
   }
 
-  remove(value){
+  remove(value) {
     //In order to remove a node, you must realize that the BST will still need to maintain its properties;
     //We have 3 scenarios, based on the # of children the node being removed has:
 
@@ -144,18 +148,18 @@ class BinarySearchTree {
     //      5             15
     //     / \          /    \
     //    3   7      13        17
-    //                 \      /  \      
-    //                 14   16    20   
+    //                 \      /  \
+    //                 14   16    20
     //                            /
     //                          18
     //Let's assume we would like to remove node 15. You cannot link the parent with only one of the children, as you
     //will lose the other child and its branch (like connecting 12 <->17, you will lose the link to 13); So what you have to do
     //is to select one of the 2 branches, select a specific node from it and copy/paste it in the place of node 15; now, which one
-    //will you choose? Well, you still have to preserve the BST rules for both branches at the same time. 
+    //will you choose? Well, you still have to preserve the BST rules for both branches at the same time.
     //The solution is to select the smallest node from the right branch or the highest node from the left branch;
     //Let's test the smallest node from right branch (node 16), if put in place of node 15:
     //- it will still be higher than any node from left branch ( cause it's from the right branch)
-    //- being instead of node 15, all nodes at its right will need to be higher( which they are, as we 
+    //- being instead of node 15, all nodes at its right will need to be higher( which they are, as we
     //chose the smallest from right branch);
     //            12
     //          /    \
@@ -163,8 +167,8 @@ class BinarySearchTree {
     //      5             16
     //     / \          /    \
     //    3   7      13        17
-    //                 \      /  \      
-    //                 14   16    20   
+    //                 \      /  \
+    //                 14   16    20
     //                            /
     //                          18
     //So now we've put 16 in the place of 15, but what will happen to the initial place of 16? Well, being the smallest
@@ -178,58 +182,60 @@ class BinarySearchTree {
     let direction = null;
     let parentNode = null;
     let currentNode = this.root;
-    while(currentNode){
-      if(currentNode.value === value){
+    while (currentNode) {
+      if (currentNode.value === value) {
         // In this "if" condition we will find our node and here we must do all the manipulation
-    
+
         //1st scenario, 0 children
-        if(currentNode.left === null && currentNode.right === null){
+        if (currentNode.left === null && currentNode.right === null) {
           parentNode[direction] = null;
-          return [ currentNode,  parentNode, direction];
+          return [currentNode, parentNode, direction];
         }
 
         //2nd scenario, 1 child
         //you need to link parent with the single child of the removed node
-        if(currentNode.left === null || currentNode.right === null){
-          parentNode[direction] = (currentNode.left === null) ?  currentNode.right : currentNode.left;
+        if (currentNode.left === null || currentNode.right === null) {
+          parentNode[direction] =
+            currentNode.left === null ? currentNode.right : currentNode.left;
           //above is ternary operator, checking which side has of removed node has null and go the other way
-          return [ currentNode,  parentNode, direction];
+          return [currentNode, parentNode, direction];
         }
 
         //3rd scenario, 2 children
-        if(currentNode.left !== null || currentNode.right !== null){
+        if (currentNode.left !== null || currentNode.right !== null) {
           //Decided to always go right subtree (currentNode.right) and find the minimum of that subtree;
           //To find the minimum of that subtree, we have to go left until we reach "null";
           //If you stay and think about it, to find the minimum of a BST, from the root you just have to keep left until
           //the last left direction points towards "null";
           let minNode = currentNode.right;
-          while( minNode.left !== null ){
+          while (minNode.left !== null) {
             minNode = minNode.left;
           }
           //Now you copy minNode's value over the value of the node you want to remove; also you will
           //need to remove minNode ( which will fall under the 1st/2nd scenario & need to do it in recursive way);
           //Doing it recursively, you know the minNode will not fall under 3rd scenario, so there will be no infinite loop;
-          
+
           //First you need to remove the node, then copy/paste the value over the space of removed node;
           //that is why we use the temp "minNodeValue"; If you copy/paste the value & then remove the node, when
           //removing the value you will find it 2 places ( at removing Node and minNode) & the recursiveness goes into loop;
           let minNodeValue = minNode.value;
-          this.remove(minNode.value);//recursivness       
+          this.remove(minNode.value); //recursivness
           currentNode.value = minNodeValue;
           return currentNode;
         }
-        
-      } else if(value < currentNode.value){//going to the left
+      } else if (value < currentNode.value) {
+        //going to the left
         parentNode = currentNode;
         currentNode = currentNode.left;
-        direction = 'left';
-      } else if(value > currentNode.value){//going to the right
+        direction = "left";
+      } else if (value > currentNode.value) {
+        //going to the right
         parentNode = currentNode;
         currentNode = currentNode.right;
-        direction = 'right';
-      }     
+        direction = "right";
+      }
     }
-    return false;    
+    return false;
   }
 }
 
@@ -245,20 +251,20 @@ const tree = new BinarySearchTree();
 //console.log('\n\nPlease see your lookup result : \n\n',tree.lookup(89));
 
 tree.insert(12);
-tree.insert(5)
-tree.insert(3)
-tree.insert(7)
-tree.insert(15)
-tree.insert(13)
-tree.insert(14)
-tree.insert(17)
-tree.insert(16)
-tree.insert(20)
-tree.insert(18)
+tree.insert(5);
+tree.insert(3);
+tree.insert(7);
+tree.insert(15);
+tree.insert(13);
+tree.insert(14);
+tree.insert(17);
+tree.insert(16);
+tree.insert(20);
+tree.insert(18);
 console.log(tree.remove(122));
 console.log(JSON.stringify(tree));
 
-
+module.exports = BinarySearchTree;
 // In case you need to create an object of the whole tree, to see it in Google Crome developer:
 // console.log(JSON.stringify(traverse(tree.root)));
 // function traverse(node) {
@@ -267,4 +273,3 @@ console.log(JSON.stringify(tree));
 //   tree.right = node.right === null ? null : traverse(node.right);
 //   return tree;
 // }
-

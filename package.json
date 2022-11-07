@@ -1,0 +1,19 @@
+{
+  "name": "data-structures-algorithms-tutorial",
+  "version": "1.0.0",
+  "description": "Theory and Exercises for DS&A",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nalx602/Data-structures-Algorithms-tutorial.git"
+  },
+  "author": "Nalx602",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nalx602/Data-structures-Algorithms-tutorial/issues"
+  },
+  "homepage": "https://github.com/Nalx602/Data-structures-Algorithms-tutorial#readme"
+}

@@ -6,7 +6,6 @@
 //removing elem will be from the head of the LL;
 // You have to create the 4 methods, peek(), enqueue(), dequeue() and isEmpty()
 
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -32,7 +31,7 @@ class Queue {
 
   peek() {
     if (this.isEmpty()) {
-      console.log('The Queue has no elements!')
+      console.log("The Queue has no elements!");
     } else {
       console.log(`The first element of the queue is `, this.first.value);
     }
@@ -60,16 +59,22 @@ class Queue {
   //Removing an elem from the Queue
   dequeue() {
     if (this.isEmpty()) {
-      console.log("Queue is already empty, please add elements before dequeuing !");
+      console.log(
+        "Queue is already empty, please add elements before dequeuing !"
+      );
     } else if (this.length === 1) {
       //in case the Queue has a single elem, you must make it back to empty;
-      console.log(`Element ${this.first.value} has been removed from the stack!`);
+      console.log(
+        `Element ${this.first.value} has been removed from the stack!`
+      );
       this.first = null;
       this.last = null;
       this.length = 0;
     } else {
       // In case there's 2 or more elem, just need to remove the head of the LL
-      console.log(`Element ${this.first.value} has been removed from the stack!`);
+      console.log(
+        `Element ${this.first.value} has been removed from the stack!`
+      );
       this.first = this.first.next;
       this.length -= 1;
     }
@@ -79,8 +84,8 @@ class Queue {
 const myQueue = new Queue();
 
 myQueue.peek();
-myQueue.enqueue('hello');
-myQueue.enqueue('there');
+myQueue.enqueue("hello");
+myQueue.enqueue("there");
 myQueue.peek();
 myQueue.dequeue();
 myQueue.peek();
@@ -90,5 +95,6 @@ myQueue.dequeue();
 myQueue.dequeue();
 
 //     x -> y -> z -> null
-//                w  
+//                w
 
+module.exports = Queue;

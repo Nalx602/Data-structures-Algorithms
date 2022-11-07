@@ -310,3 +310,5 @@ console.log("DFS PostOrder :\n", tree.dfsPostOrder());
 // 3. Visit the root
 //Note: this traversal is used to delete the tree.
 //Postorder traversal is also useful to get the postfix expression of an expression tree.
+
+module.exports = BinarySearchTree;
