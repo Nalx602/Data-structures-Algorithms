@@ -96,7 +96,7 @@ const checkSymmetry = function (left, right) {
     checkSymmetry(left.right, right.left)
   );
 };
-
+/*
 const isSymmetricIter = function (root) {
   if (!root) return true; // no BT, so symmetric
   if (root.left === null && root.right === null) return true; //single node BT
@@ -138,3 +138,4 @@ const isSymmetricIter = function (root) {
 console.log(isSymmetricRec(root1));
 console.log(isSymmetricRec(root2));
 console.log(isSymmetricRec(root3));
+*/
